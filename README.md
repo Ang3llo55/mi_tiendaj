@@ -62,6 +62,12 @@ sudo mkdir -p /var/www/html/mi_tienda/uploads
 sudo chown -R www-data:www-data /var/www/html/mi_tienda
 sudo chmod -R 755 /var/www/html/mi_tienda
 sudo chmod -R 775 /var/www/html/mi_tienda/uploads
+
+# Ajustar permisos de las tablas
+sudo -u postgres psql tienda_db
+GRANT SELECT ON TABLE users TO tienda_user;
+GRANT INSERT, UPDATE, DELETE ON TABLE users TO tienda_user;
+GRANT USAGE, SELECT ON SEQUENCE users_id_seq TO tienda_user;
 ```
 
 ### 5. Configurar credenciales de base de datos
@@ -266,5 +272,6 @@ php -r "echo password_hash('tu_contraseña', PASSWORD_DEFAULT);"
 - ✅ Validaciones de servidor
 
 ## 📄 Licencia
+
 
 Este proyecto es de código abierto y está disponible para uso educativo.
